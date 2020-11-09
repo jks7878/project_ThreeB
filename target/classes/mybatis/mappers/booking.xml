@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC	"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.booking">
+
+<resultMap type="bookingVO" id="bookingResult">
+	<result property="booking_id" column="booking_id"/>
+	<result property="member_id" column="member_id"/>
+	<result property="house_id" column="house_id"/>
+	<result property="house_title" column="house_title"/>
+	<result property="house_location" column="house_location"/>
+	<result property="checkin" column="checkin"/>
+	<result property="checkout" column="checkout"/>
+	<result property="booking_total" column="booking_total"/>
+	<result property="booking_detail" column="booking_detail"/>
+	<result property="booking_amount" column="booking_amount"/>
+	<result property="memo" column="memo"/>
+</resultMap>
+
+	<select id="selectListBookingFuture" resultMap="bookingResult" parameterType="String">
+		<![CDATA[
+			select * from threeb_booking 
+			where round(sysdate-checkin)<0 and member_id=#{member_id} 
+			order by checkin asc
+		]]>
+	</select>
+	
+	<select id="selectListBookingPast" resultMap="bookingResult" parameterType="String">
+		<![CDATA[
+			select * from threeb_booking 
+			where round(sysdate-checkin)>0 and member_id=#{member_id} 
+			order by checkin desc
+		]]>
+	</select>
+	
+	<select id="selectBookingInfo" resultType="bookingVO" parameterType="int">
+		<![CDATA[
+			select * from threeb_booking
+			where booking_id=#{booking_id}
+		]]>
+	</select>
+	
+	<delete id="deleteBooking" parameterType="int">
+		<![CDATA[
+			delete from threeb_booking where booking_id=#{booking_id}
+		]]>
+	</delete>
+	
+</mapper>

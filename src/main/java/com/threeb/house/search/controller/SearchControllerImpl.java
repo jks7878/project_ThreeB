@@ -39,10 +39,13 @@ public class SearchControllerImpl implements SearchController {
 	private static final Logger logger = LoggerFactory.getLogger(SearchControllerImpl.class);
 	
 	@Override
-	@RequestMapping(value="/board/searchArticles.do", method=RequestMethod.GET)
-	public String searchHouse(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {	
+	@RequestMapping(value="/house/search.do", method=RequestMethod.GET)
+	public ModelAndView searchHouse(HttpServletRequest request, HttpServletResponse response) throws Exception {	
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		
 		String addr = (String)request.getParameter("address");
-		model.addAttribute("location", addr);
+		mav.addObject("location", addr);
 		String start = (String)request.getParameter("start");
 		String end = (String)request.getParameter("end");
 		int person = Integer.parseInt(request.getParameter("person"));
@@ -64,7 +67,7 @@ public class SearchControllerImpl implements SearchController {
 			jsonArray.add(jsonList);
 		}
 		System.out.println("jsonArray : " + jsonArray);
-		model.addAttribute("houseList", jsonArray);
+		mav.addObject("houseList", jsonArray);
 		
 		/*
 		 * List<String> addrList = new ArrayList<String>(); List<Integer> chargeList =
@@ -75,11 +78,11 @@ public class SearchControllerImpl implements SearchController {
 		 */
 		
 
-		return "result";
+		return mav;
 	}
 
 	@Override
-	@RequestMapping(value="/board/listArticles.do", method=RequestMethod.GET)
+	@RequestMapping(value="/house/listArticles.do", method=RequestMethod.GET)
 	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
 		System.out.println(viewName);

@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<% request.setCharacterEncoding("UTF-8"); %>
+    pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>검색</title>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<title>main</title>
 </head>
 <body>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	2195bda5cc0442e30e93d9b9b8e78985&libraries=services"></script>
@@ -25,17 +27,17 @@
 				alert("잘못된 주소입니다");
 		    }else if(status === kakao.maps.services.Status.OK) {
 		    	location.href=
-		    		"${cotextPath}/threeb/board/searchArticles.do?address=" + addr
+		    		"${cotextPath}/threeb/house/search.do?address=" + addr
  		    		+ "&start=" + start
 		    		+ "&end=" + end
 		    		+ "&person=" + person; 
 		    }else if(status === kakao.maps.services.Status.ERROR) {
 		    	alert("error");
 		    } 
-		});    
-		
+		});    	
 	}
 </script>
+	<div class="main">
 	<table border="1">
 		<tr>
 			<td>
@@ -82,7 +84,6 @@
 			</td>
 		</tr>
 	</table>
+	</div>
 </body>
-</html> 
-						
-					
+</html>

@@ -6,103 +6,153 @@ import org.springframework.stereotype.Component;
 
 @Component("houseVO")
 public class HouseVO {
-	private int houseId;
-	private String memberId;
-	private String houseType;
-	private int housePerson;
-	private int houseRoom;
-	private int houseBed;
-	private String houseBedType;
-	private int houseBath;
-	private String location;
-	private String houseFacility;
-	private String houseTitle;
-	private String houseContent;
-	private int houseCharge;
-	private Date houseWritedate;
 	
-	public int getHouseId() {
-		return houseId;
+	private int house_id; //숙소게시물번호
+	private String member_id; //등록자
+	private String house_type; //숙소유형
+	private int house_person; //숙박최대인원
+	private int house_room; //침실개수
+	private int house_bed; //침대개수
+	private String house_bed_type; //침대유형
+	private int house_bath; //욕실개수
+	private String house_location; //숙소위치
+	private String house_facility; //숙소시설
+	private String house_content; //숙소소개
+	private String house_title; //숙소명
+	private int house_charge; //1박요금
+	private Date house_writedate; //등록일자
+	
+	public HouseVO() {
+		super();
 	}
-	public void setHouseId(int houseId) {
-		this.houseId = houseId;
+
+	public HouseVO(String member_id, String house_type, int house_person, int house_room, int house_bed,
+			String house_bed_type, int house_bath, String house_location, String house_facility, String house_content,
+			String house_title, int house_charge) {
+		super();
+		this.member_id = member_id;
+		this.house_type = house_type;
+		this.house_person = house_person;
+		this.house_room = house_room;
+		this.house_bed = house_bed;
+		this.house_bed_type = house_bed_type;
+		this.house_bath = house_bath;
+		this.house_location = house_location;
+		this.house_facility = house_facility;
+		this.house_content = house_content;
+		this.house_title = house_title;
+		this.house_charge = house_charge;
 	}
-	public String getMemberId() {
-		return memberId;
+
+	public int getHouse_id() {
+		return house_id;
 	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+
+	public void setHouse_id(int house_id) {
+		this.house_id = house_id;
 	}
-	public String getHouseType() {
-		return houseType;
+
+	public String getMember_id() {
+		return member_id;
 	}
-	public void setHouseType(String houseType) {
-		this.houseType = houseType;
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
 	}
-	public int getHousePerson() {
-		return housePerson;
+
+	public String getHouse_type() {
+		return house_type;
 	}
-	public void setHousePerson(int housePerson) {
-		this.housePerson = housePerson;
+
+	public void setHouse_type(String house_type) {
+		this.house_type = house_type;
 	}
-	public int getHouseRoom() {
-		return houseRoom;
+
+	public int getHouse_person() {
+		return house_person;
 	}
-	public void setHouseRoom(int houseRoom) {
-		this.houseRoom = houseRoom;
+
+	public void setHouse_person(int house_person) {
+		this.house_person = house_person;
 	}
-	public int getHouseBed() {
-		return houseBed;
+
+	public int getHouse_room() {
+		return house_room;
 	}
-	public void setHouseBed(int houseBed) {
-		this.houseBed = houseBed;
+
+	public void setHouse_room(int house_room) {
+		this.house_room = house_room;
 	}
-	public String getHouseBedType() {
-		return houseBedType;
+
+	public int getHouse_bed() {
+		return house_bed;
 	}
-	public void setHouseBedType(String houseBedType) {
-		this.houseBedType = houseBedType;
+
+	public void setHouse_bed(int house_bed) {
+		this.house_bed = house_bed;
 	}
-	public int getHouseBath() {
-		return houseBath;
+
+	public String getHouse_bed_type() {
+		return house_bed_type;
 	}
-	public void setHouseBath(int houseBath) {
-		this.houseBath = houseBath;
+
+	public void setHouse_bed_type(String house_bed_type) {
+		this.house_bed_type = house_bed_type;
 	}
-	public String getLocation() {
-		return location;
+
+	public int getHouse_bath() {
+		return house_bath;
 	}
-	public void setLocation(String location) {
-		this.location = location;
+
+	public void setHouse_bath(int house_bath) {
+		this.house_bath = house_bath;
 	}
-	public String getHouseFacility() {
-		return houseFacility;
+
+	public String getHouse_location() {
+		return house_location;
 	}
-	public void setHouseFacility(String houseFaciltiy) {
-		this.houseFacility = houseFaciltiy;
+
+	public void setHouse_location(String house_location) {
+		this.house_location = house_location;
 	}
-	public String getHouseTitle() {
-		return houseTitle;
+
+	public String getHouse_facility() {
+		return house_facility;
 	}
-	public void setHouseTitle(String houseTitle) {
-		this.houseTitle = houseTitle;
+
+	public void setHouse_facility(String house_facility) {
+		this.house_facility = house_facility;
 	}
-	public String getHouseContent() {
-		return houseContent;
+
+	public String getHouse_content() {
+		return house_content;
 	}
-	public void setHouseContent(String houseContent) {
-		this.houseContent = houseContent;
+
+	public void setHouse_content(String house_content) {
+		this.house_content = house_content;
 	}
-	public int getHouseCharge() {
-		return houseCharge;
+
+	public String getHouse_title() {
+		return house_title;
 	}
-	public void setHouseCharge(int houseCharge) {
-		this.houseCharge = houseCharge;
+
+	public void setHouse_title(String house_title) {
+		this.house_title = house_title;
 	}
-	public Date getHouseWritedate() {
-		return houseWritedate;
+
+	public int getHouse_charge() {
+		return house_charge;
 	}
-	public void setHouseWritedate(Date houseWritedate) {
-		this.houseWritedate = houseWritedate;
+
+	public void setHouse_charge(int house_charge) {
+		this.house_charge = house_charge;
+	}
+
+	public Date getHouse_writedate() {
+		return house_writedate;
+	}
+
+	public void setHouse_writedate(Date house_writedate) {
+		this.house_writedate = house_writedate;
 	}
 }
