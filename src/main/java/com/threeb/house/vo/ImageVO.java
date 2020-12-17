@@ -1,18 +1,16 @@
 package com.threeb.house.vo;
 
-public class ImageVO {	
+import org.springframework.stereotype.Component;
+
+@Component("imageVO")
+public class ImageVO {
+	
 	private int img_id; //이미지번호
 	private String filename; //파일이름
 	private int house_id; //숙소게시물번호
 	
 	public ImageVO() {
 		super();
-	}
-
-	public ImageVO(String filename, int house_id) {
-		super();
-		this.filename = filename;
-		this.house_id = house_id;
 	}
 
 	public int getImg_id() {

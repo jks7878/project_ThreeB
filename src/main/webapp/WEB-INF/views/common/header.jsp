@@ -40,8 +40,7 @@
 						<ul class="dropdown-menu">
 							<li><a href="${contextPath }/mypage/guest.do" class="dropdown-item">나의 예약</a></li>
 							<li><a href="${contextPath }/mypage/host.do" class="dropdown-item">숙소 관리</a></li>
-							<li><a href="${contextPath }/house/upload.do" class="dropdown-item">숙소 등록</a></li>
-							<li><a href="#" class="dropdown-item">계정</a></li>
+							<!-- <li><a href="#" class="dropdown-item">계정</a></li> -->
 							<div class="dropdown-divider"></div>
 							<li><a href="${contextPath }/member/logout.do" class="dropdown-item">로그아웃</a></li>
 						</ul>

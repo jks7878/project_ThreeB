@@ -5,8 +5,10 @@ import java.util.Map;
 
 import com.threeb.house.vo.HouseVO;
 
-
-
 public interface SearchService {
-	public List<HouseVO> listAllHouse(Map<String, Object> searchMap) throws Exception;
+	
+	public int houseCnt(Map<String, Object> searchMap) throws Exception;
+	public List<HouseVO> selectHouseList(Map<String, Object> searchMap) throws Exception;
+	public HouseVO selectHouse(int house_id) throws Exception;
+	
 }

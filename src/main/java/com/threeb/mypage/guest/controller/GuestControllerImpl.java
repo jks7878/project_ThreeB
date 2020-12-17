@@ -1,6 +1,7 @@
 package com.threeb.mypage.guest.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +35,6 @@ public class GuestControllerImpl implements GuestController {
 	@Autowired ReviewVO reviewVO;
 	
 	//나의 예약 페이지
-	@Override
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView guestPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName=(String)request.getAttribute("viewName");
@@ -43,28 +43,8 @@ public class GuestControllerImpl implements GuestController {
 		HttpSession session=request.getSession();
 		loginMember=(MemberVO)session.getAttribute("member");
 		//로그인 회원 예약,후기정보 가져오기
-		List<BookingVO> listBookingFuture=guestService.listBookingFuture(loginMember.getMember_id());
-		List<BookingVO> listBookingPast=guestService.listBookingPast(loginMember.getMember_id());
-		List<ReviewVO> listReview=guestService.listReview(loginMember.getMember_id());
-		//숙소 평점, 해당 후기 여부
-		for(BookingVO booking:listBookingPast) {
-			booking.setReview_score(guestService.reviewAvg(booking.getHouse_id()));
-			booking.setReview_count(guestService.reviewCount(booking.getHouse_id()));
-			for(ReviewVO review:listReview) {
-				if(booking.getBooking_id()==review.getBooking_id()) {
-					booking.setReviewCheck(1);
-				}
-			}
-		}
-		for(BookingVO booking:listBookingFuture) {
-			 booking.setReview_score(guestService.reviewAvg(booking.getHouse_id()));
-			 booking.setReview_count(guestService.reviewCount(booking.getHouse_id()));
-		}
-		int reviewCnt=guestService.reviewCnt(loginMember.getMember_id());
-		mav.addObject("reviewCnt", reviewCnt);
-		mav.addObject("listReview", listReview);
-		mav.addObject("listBookingFuture", listBookingFuture);
-		mav.addObject("listBookingPast", listBookingPast);
+		Map listGuest=guestService.listGuest(loginMember.getMember_id());
+		mav.addObject("listGuest", listGuest);
 		return mav;
 	}
 	
@@ -74,9 +54,9 @@ public class GuestControllerImpl implements GuestController {
 	public ModelAndView viewBooking(@RequestParam("id") int booking_id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		String viewName=(String)request.getAttribute("viewName");
-		bookingVO=guestService.bookingInfo(booking_id);
+		Map listInfo=guestService.bookingReceipt(booking_id);
 		ModelAndView mav=new ModelAndView(viewName);
-		mav.addObject("booking", bookingVO);
+		mav.addObject("listInfo", listInfo);
 		return mav;
 	}
 	
@@ -86,7 +66,6 @@ public class GuestControllerImpl implements GuestController {
 	public ResponseEntity cancelBooking(@RequestParam("id") int booking_id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		request.setCharacterEncoding("UTF-8");
-		ModelAndView mav=new ModelAndView("redirect:/mypage/guest.do");
 		String message;
 		ResponseEntity resEnt=null;
 		HttpHeaders responseHeaders=new HttpHeaders();
@@ -126,6 +105,7 @@ public class GuestControllerImpl implements GuestController {
 	//후기 작성
 	@Override
 	@RequestMapping(value = "/writeReview.do", method = RequestMethod.POST)
+	@ResponseBody
 	public ResponseEntity writeReview(@ModelAttribute ReviewVO review,HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
 		request.setCharacterEncoding("UTF-8");

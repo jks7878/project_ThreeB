@@ -7,8 +7,10 @@ import org.springframework.dao.DataAccessException;
 
 import com.threeb.house.vo.HouseVO;
 
-
 public interface SearchDAO {
-	public List<HouseVO> selectAllHouse(Map<String, Object> searchMap) throws DataAccessException;
-	public List<HouseVO> ableHouse(List<HouseVO> houseList) throws DataAccessException;
+	
+	public List<HouseVO> selectHouseList(Map<String, Object> searchMap) throws DataAccessException;
+	public HouseVO selectHouse(int house_id) throws DataAccessException;
+	public int houseCnt(Map<String, Object> searchMap);
+
 }

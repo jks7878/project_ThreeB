@@ -6,22 +6,24 @@ import org.springframework.stereotype.Component;
 
 @Component("bookingVO")
 public class BookingVO {
-
 	private int booking_id; //예약번호
 	private String member_id; //예약자
 	private int house_id; //숙소게시물번호
 	private String house_title; //숙소명
 	private String house_location; //숙소위치
 	private double review_score; //평점
-	private int review_count; //리뷰갯수
+	private int review_count; //후기갯수
 	private Date checkin; //체크인날짜
 	private Date checkout; //체크아웃날짜
 	private int booking_total; //예약인원
 	private String booking_detail; //인원세부사항(성인,청소년,소아)
 	private int booking_amount; //총결제금액
 	private String memo; //요청사항
-	private long diffDay;
-	private int reviewCheck;
+	private String card_type; //카드종류
+	private String card_num; //카드번호 뒷4자리
+	private String paydate; //결제일
+	private int gap;
+	private int reviewCheck; //후기여부
 	
 	public BookingVO() {
 		
@@ -131,12 +133,36 @@ public class BookingVO {
 		this.memo = memo;
 	}
 
-	public long getDiffDay() {
-		return diffDay;
+	public String getCard_type() {
+		return card_type;
 	}
 
-	public void setDiffDay(long diffDay) {
-		this.diffDay = diffDay;
+	public void setCard_type(String card_type) {
+		this.card_type = card_type;
+	}
+
+	public String getCard_num() {
+		return card_num;
+	}
+
+	public void setCard_num(String card_num) {
+		this.card_num = card_num;
+	}
+
+	public String getPaydate() {
+		return paydate;
+	}
+
+	public void setPaydate(String paydate) {
+		this.paydate = paydate;
+	}
+
+	public int getGap() {
+		return gap;
+	}
+
+	public void setGap(int gap) {
+		this.gap = gap;
 	}
 
 	public int getReviewCheck() {
@@ -146,5 +172,5 @@ public class BookingVO {
 	public void setReviewCheck(int reviewCheck) {
 		this.reviewCheck = reviewCheck;
 	}
-}
 
+}

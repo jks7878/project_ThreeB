@@ -12,7 +12,6 @@ import com.threeb.mypage.vo.ReviewVO;
 
 public interface GuestController {
 	
-	public ModelAndView guestPage(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView viewBooking(@RequestParam("id") int booking_id, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ResponseEntity cancelBooking(@RequestParam("id") int booking_id, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ResponseEntity reviewForm(@RequestParam("id") int booking_id, HttpServletRequest request, HttpServletResponse response) throws Exception;

@@ -16,7 +16,8 @@ html, body {
 .wrap {
 	min-height: calc(100% - 80px);
 }
-.header {
+header {
+	position: relative;
 	height: 100px;
 	background: transparent;
 }

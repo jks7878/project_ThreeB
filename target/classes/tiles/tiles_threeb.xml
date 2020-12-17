@@ -41,18 +41,6 @@
 		<put-attribute name="body" value="/WEB-INF/views/mypage/guest/viewBooking.jsp"/>
 	</definition>
 	
-	<!-- 후기작성
-	<definition name="/mypage/guest/reviewForm" template="/WEB-INF/views/mypage/guest/reviewForm.jsp">
-		<put-attribute name="title" value="후기작성"/>
-		<put-attribute name="body" value="/WEB-INF/views/mypage/guest/reviewForm.jsp"/>
-	</definition> -->
-	
-	<!-- 후기보기
-	<definition name="/mypage/guest/viewReview" template="/WEB-INF/views/mypage/guest/viewReview.jsp">
-		<put-attribute name="title" value="후기보기"/>
-		<put-attribute name="body" value="/WEB-INF/views/mypage/guest/viewReview.jsp"/>
-	</definition> -->
-	
 	<!-- 숙소관리 -->
 	<definition name="/mypage/host" extends="baseLayout">
 		<put-attribute name="title" value="숙소 관리"/>
@@ -60,9 +48,9 @@
 	</definition>
 	
 	<!-- 숙소등록 -->
-	<definition name="/house/upload" extends="baseLayout">
+	<definition name="/mypage/host/uploadForm" extends="baseLayout">
 		<put-attribute name="title" value="숙소 등록하기"/>
-		<put-attribute name="body" value="/WEB-INF/views/house/upload.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/mypage/host/uploadForm.jsp"/>
 	</definition>
 	
 	<!-- 계정관리 -->

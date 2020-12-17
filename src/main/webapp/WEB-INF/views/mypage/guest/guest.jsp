@@ -3,6 +3,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>
+<c:set var="reviewCnt" value="${listGuest.reviewCnt }"/>
+<c:set var="listBookingFuture" value="${listGuest.listBookingFuture }"/>
+<c:set var="listBookingFutureImg" value="${listGuest.listBookingFutureImg }"/>
+<c:set var="listBookingPast" value="${listGuest.listBookingPast }"/>
+<c:set var="listBookingPastImg" value="${listGuest.listBookingPastImg }"/>
+<c:set var="listReview" value="${listGuest.listReview }"/>
+<c:set var="listReviewImg" value="${listGuest.listReviewImg }"/>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -19,6 +26,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${contextPath }/resources/css/jquery.scrollbar.css"/>
 <link rel="stylesheet" href="${contextPath }/resources/css/mypage/guest.css"/>
 <style>
@@ -56,13 +64,13 @@ button:focus {
 			</div>
 </c:when>
 <c:otherwise>
-<c:forEach var="booking" items="${listBookingFuture }">
-			<div class="card bg-light mb-3">
+<c:forEach var="booking" items="${listBookingFuture }" varStatus="status">
+			<div class="card mb-3">
 				<div class="row no-gutters">
-					<div class="col-md-4 img">
-						<img class="rounded" src="${contextPath }/resources/image/house.jpg" alt="house-img">
+					<div class="col-md-4 float-left img">
+						<img class="rounded" src="${contextPath}/download.do?house_id=${booking.house_id}&imageFileName=${listBookingFutureImg[status.index].filename}" alt="house-img">
 					</div>
-					<div class="col-md-9">
+					<div class="col-md-9 float-right">
 						<div class="card-body">
 							<h5 class="card-title">${booking.house_title }</h5>
 							<hr class="my-3">
@@ -119,13 +127,13 @@ button:focus {
 		</div>
 </c:when>
 <c:otherwise>
-<c:forEach var="booking" items="${listBookingPast }">
-		<div class="card bg-light mb-3">
+<c:forEach var="booking" items="${listBookingPast }" varStatus="status">
+		<div class="card mb-3">
 			<div class="row no-gutters">
-				<div class="col-md-4 img">
-					<img class="rounded" src="${contextPath }/resources/image/house.jpg" alt="house-img">
+				<div class="col-md-4 float-left img">
+					<img class="rounded" src="${contextPath}/download.do?house_id=${booking.house_id}&imageFileName=${listBookingPastImg[status.index].filename}" alt="house-img">
 				</div>
-				<div class="col-md-9">
+				<div class="col-md-9 float-right">
 					<div class="card-body">
 						<h5 class="card-title">${booking.house_title }</h5>
 						<hr class="my-3">
@@ -190,10 +198,10 @@ button:focus {
 </c:when>
 <c:otherwise>
 		<div class="scrollbar-dynamic list-content">
-<c:forEach var="review" items="${listReview }">
+<c:forEach var="review" items="${listReview }" varStatus="status">
 			<div class="card">
 				<div class="card-img">
-					<img src="${contextPath }/resources/image/house.jpg" class="card-img-top" alt="reviewImage">
+					<img src="${contextPath}/download.do?house_id=${review.house_id}&imageFileName=${listReviewImg[status.index].filename}" class="card-img-top" alt="reviewImage">
 				</div>
 				<div class="card-body">
 					<p class="card-score">
@@ -398,7 +406,7 @@ button:focus {
 	$('#writeReview').submit(function () {
 		$.ajax({
 			type : "post",
-			async : false,
+			async : true,
 			url : "${contextPath}/mypage/guest/writeReview.do",
 			dataType : "text",
 			data : {
@@ -408,6 +416,7 @@ button:focus {
 			},
 			success : function(data, textStatus) {
 				alert(data);
+				window.location.href="${contextPath}/mypage/guest.do";
 			},
 			error : function(data, textStatus) {
 				alert("오류가 발생했습니다.");
@@ -473,7 +482,7 @@ button:focus {
 	$('#modReview').submit(function () {
 		$.ajax({
 			type : "post",
-			async : false,
+			async : true,
 			url : "${contextPath}/mypage/guest/modReview.do",
 			dataType : "text",
 			data : {
@@ -483,6 +492,7 @@ button:focus {
 			},
 			success : function(data, textStatus) {
 				alert(data);
+				window.location.href="${contextPath}/mypage/guest.do";
 			},
 			error : function(data, textStatus) {
 				alert("오류가 발생했습니다.");

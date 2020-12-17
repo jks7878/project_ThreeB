@@ -18,6 +18,12 @@ button:focus {
 	padding-right: 40px;
 	border: none!important;
 	min-height: 80px!important;
+	border-radius: none!important;
+}
+@media (min-width:768px) {
+	.navbar {
+		border-radius: none!important;
+	}
 }
 .navbar-default {
 	background-color: transparent!important;
@@ -35,8 +41,11 @@ button:focus {
 .navbar .nav li {
 	position: relative;
 }
-.navbar .nav li a {
-	color: #555;
+.navbar .nav-item .dropdown-menu a {
+	color: #777!important;
+}
+.navbar .nav-item .dropdown-menu a:hover {
+	color: #555!important;
 }
 .navbar .navbar-right li:firstChild a {
 	padding-right: 30px;
@@ -55,7 +64,7 @@ button:focus {
 	line-height: 2.2!important;
 }
 .dropdown-menu>li>a:hover {
-	background-color: #f9f9f9;
+	background-color: #f0f0f0;
 }
 .dropdown-divider {
 	text-align: center;

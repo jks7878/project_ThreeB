@@ -39,6 +39,12 @@ button:focus {
 	border: none;
 }
 </style>
+<script>
+window.onload = function () {
+	$("#member_id").val("");
+	$("#member_pwd").val("");
+}
+</script>
 <title>login</title>
 </head>
 <body>
@@ -66,134 +72,134 @@ button:focus {
 					</button>
 				</div>
 				<div class="etc-login-form">
-					<p>비밀번호를 잊으셨나요?&nbsp;&nbsp;<a href="#">찾기</a></p>
+					<!-- <p>비밀번호를 잊으셨나요?&nbsp;&nbsp;<a href="#">찾기</a></p> -->
 					<p>계정이 없으세요?&nbsp;&nbsp;<a href="${contextPath }/member/joinForm.do">회원가입</a></p>
 				</div>
 			</form>
-		<script>
-		(function($) {
-			"use strict";
-
-			// Options for Message
-			//----------------------------------------------
-			var options = {
-				'btn-primary' : '<i class="fa fa-chevron-right"></i>',
-				'btn-loading' : '<i class="fa fa-spinner fa-pulse"></i>',
-				'btn-success' : '<i class="fa fa-check"></i>',
-				'btn-error' : '<i class="fa fa-remove"></i>',
-				'msg-success' : '로그인 되었습니다.',
-				'msg-error' : '아이디와 비밀번호가 일치하지 않습니다.',
-				'useAJAX' : true,
-			};
-
-			// Login Form
-			//----------------------------------------------
-			// Validation
-			$("#login-form").validate({
-				rules : {
-					member_id : "required",
-					member_pwd : "required",
-				},
-				messages : {
-					member_id : {
-						required : "아이디를 입력해주세요."
+			<script>
+			(function($) {
+				"use strict";
+	
+				// Options for Message
+				//----------------------------------------------
+				var options = {
+					'btn-primary' : '<i class="fa fa-chevron-right"></i>',
+					'btn-loading' : '<i class="fa fa-spinner fa-pulse"></i>',
+					'btn-success' : '<i class="fa fa-check"></i>',
+					'btn-error' : '<i class="fa fa-remove"></i>',
+					'msg-success' : '로그인 되었습니다.',
+					'msg-error' : '아이디와 비밀번호가 일치하지 않습니다.',
+					'useAJAX' : true,
+				};
+	
+				// Login Form
+				//----------------------------------------------
+				// Validation
+				$("#login-form").validate({
+					rules : {
+						member_id : "required",
+						member_pwd : "required",
 					},
-					member_pwd : {
-						required : "비밀번호를 입력해주세요."
-					}
-				},
-				errorClass : "form-invalid"
-			});
-
-			// Form Submission
-			$("#login-form").submit(function() {
-				form_primary($(this));
-				if (options['useAJAX'] == true) {
-					// Dummy AJAX request (Replace this with your AJAX code)
-					// If you don't want to use AJAX, remove this
-					dummy_submit_form($(this));
-					// Cancel the normal submission.
-					// If you don't want to use AJAX, remove this
-					return false;
-				}
-			});
-
-			// Loading
-			//----------------------------------------------
-			function remove_loading($form) {
-				$form.find('[type=submit]').removeClass('error success');
-				$form.find('.login-form-main-message')
-						.removeClass('show error success').html('');
-			}
-
-			function form_primary($form) {
-				$form.find('[type=submit]').removeClass('error success clicked').html(
-						options['btn-primary']);
-				$form.find('.login-form-main-message')
-						.removeClass('show error success').html('');
-			}
-
-			function form_loading($form) {
-				$form.find('[type=submit]').addClass('clicked').html(
-						options['btn-loading']);
-			}
-
-			function form_success($form) {
-				$form.find('[type=submit]').addClass('success').html(
-						options['btn-success']);
-				$form.find('.login-form-main-message').addClass('show success').html(
-						options['msg-success']);
-			}
-
-			function form_failed($form) {
-				$form.find('[type=submit]').addClass('error')
-						.html(options['btn-error']);
-				$form.find('.login-form-main-message').addClass('show error').html(
-						options['msg-error']);
-			}
-
-			// Dummy Submit Form (Remove this)
-			//----------------------------------------------
-			// This is just a dummy form submission. You should use your AJAX function or remove this function if you are not using AJAX.
-			function dummy_submit_form($form) {
-				if ($form.valid()) {
-					$.ajax({
-						type : "post",
-						async : false,
-						url : "${contextPath}/member/login.do",
-						dataType : "text",
-						data : {
-							member_id : $("#member_id").val(),
-							member_pwd : $("#member_pwd").val()
+					messages : {
+						member_id : {
+							required : "아이디를 입력해주세요."
 						},
-						success : function(data, textStatus) {
-							if (data == 'true') {
-								form_loading($form);
-								var session = '<%=session.getAttribute("action")%>';
-								if (session != 'null') {
-									location.href = session;
-								} else {
-									location.href = "${contextPath}/main.do";
-								}
-							} else {
-								form_loading($form);
-								setTimeout(function() {
-									form_failed($form);
-								}, 1000);
-							}
-						},
-						error : function(data, textStatus) {
-							alert("오류가 발생했습니다.");
-						},
-						complete : function(data, textStatus) {
-
+						member_pwd : {
+							required : "비밀번호를 입력해주세요."
 						}
-					});
+					},
+					errorClass : "form-invalid"
+				});
+	
+				// Form Submission
+				$("#login-form").submit(function() {
+					form_primary($(this));
+					if (options['useAJAX'] == true) {
+						// Dummy AJAX request (Replace this with your AJAX code)
+						// If you don't want to use AJAX, remove this
+						dummy_submit_form($(this));
+						// Cancel the normal submission.
+						// If you don't want to use AJAX, remove this
+						return false;
+					}
+				});
+	
+				// Loading
+				//----------------------------------------------
+				function remove_loading($form) {
+					$form.find('[type=submit]').removeClass('error success');
+					$form.find('.login-form-main-message')
+							.removeClass('show error success').html('');
 				}
-			}
-
-		})(jQuery);	
-		</script>
+	
+				function form_primary($form) {
+					$form.find('[type=submit]').removeClass('error success clicked').html(
+							options['btn-primary']);
+					$form.find('.login-form-main-message')
+							.removeClass('show error success').html('');
+				}
+	
+				function form_loading($form) {
+					$form.find('[type=submit]').addClass('clicked').html(
+							options['btn-loading']);
+				}
+	
+				function form_success($form) {
+					$form.find('[type=submit]').addClass('success').html(
+							options['btn-success']);
+					$form.find('.login-form-main-message').addClass('show success').html(
+							options['msg-success']);
+				}
+	
+				function form_failed($form) {
+					$form.find('[type=submit]').addClass('error')
+							.html(options['btn-error']);
+					$form.find('.login-form-main-message').addClass('show error').html(
+							options['msg-error']);
+				}
+	
+				// Dummy Submit Form (Remove this)
+				//----------------------------------------------
+				// This is just a dummy form submission. You should use your AJAX function or remove this function if you are not using AJAX.
+				var refUrl="<%=session.getAttribute("refUrl")%>";
+				function dummy_submit_form($form) {
+					if ($form.valid()) {
+						$.ajax({
+							type : "post",
+							async : false,
+							url : "${contextPath}/member/login.do",
+							dataType : "text",
+							data : {
+								member_id : $("#member_id").val(),
+								member_pwd : $("#member_pwd").val()
+							},
+							success : function(data, textStatus) {
+								if (data == 'true') {
+									form_loading($form);
+									if(refUrl=='/threeb/member/joinForm.do') {
+										location.href='${contextPath}/main.do';
+									}else {
+										location.href=refUrl;
+									}
+								} else {
+									form_loading($form);
+									setTimeout(function() {
+										form_failed($form);
+									}, 1000);
+								}
+							},
+							error : function(data, textStatus) {
+								alert("오류가 발생했습니다.");
+							},
+							complete : function(data, textStatus) {
+	
+							}
+						});
+					}
+				}
+	
+			})(jQuery);	
+			</script>
 		</div>
 		<!-- end:Main Form -->
 	</div>

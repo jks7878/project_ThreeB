@@ -35,6 +35,17 @@ button:focus {
 	border: none;
 }
 </style>
+<script>
+window.onload = function () {
+	$("#member_id").val("");
+	$("#member_pwd").val("");
+	$("#member_pwd_confirm").val("");
+	$("#member_name").val("");
+	$("#phone").val("");
+	$("#email").val("");
+	$("#agree").val("");
+}
+</script>
 </head>
 <body>
 <!-- REGISTRATION FORM -->
@@ -256,12 +267,7 @@ button:focus {
 							if (data == 'true') {
 								form_loading($form);
 								alert("회원가입 되었습니다.");
-								var session = '<%=session.getAttribute("action")%>';
-								if (session != 'null') {
-									location.href = session;
-								} else {
-									location.href = "${contextPath}/member/loginForm.do";
-								}
+								location.href = "${contextPath}/member/loginForm.do";
 							}else if(data == 'id_false') {
 								form_loading($form);
 								setTimeout(function() {

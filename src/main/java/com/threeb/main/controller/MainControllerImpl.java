@@ -20,9 +20,6 @@ public class MainControllerImpl implements MainController {
 	private ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav=new ModelAndView(viewName);
-		
-		Date date=Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
-		System.out.println(date);
 		return mav;
 	}
 

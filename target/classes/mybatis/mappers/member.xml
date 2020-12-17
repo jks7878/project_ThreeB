@@ -20,8 +20,10 @@
 	</insert>
 	
 	<select id="selectOverlappedID" parameterType="String" resultType="String">
-		select decode(count(*), 1, 'true', 0, 'false')from threeb_member
-		where member_id = #{member_id}
+		<![CDATA[
+			select decode(count(*), 1, 'true', 0, 'false')from threeb_member
+			where member_id = #{member_id}
+		]]>
 	</select>
 	
 	<select id="loginById" resultType="memberVO" parameterType="memberVO">

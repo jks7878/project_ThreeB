@@ -1,6 +1,9 @@
 package com.threeb.mypage.guest.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -8,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.threeb.common.service.CommonService;
+import com.threeb.house.vo.ImageVO;
 import com.threeb.mypage.guest.dao.GuestDAO;
 import com.threeb.mypage.vo.BookingVO;
 import com.threeb.mypage.vo.ReviewVO;
@@ -17,45 +22,55 @@ import com.threeb.mypage.vo.ReviewVO;
 public class GuestServiceImpl implements GuestService {
 	
 	@Autowired GuestDAO guestDAO;
+	@Autowired CommonService commonService;
 	
-	//예정예약 리스트
+	//나의 예약 페이지
 	@Override
-	public List listBookingFuture(String member_id) throws Exception {
-		List<BookingVO> listBooking=guestDAO.selectListBookingFuture(member_id);
-		return listBooking;
-	}
-	
-	//지난예약 리스트
-	@Override
-	public List listBookingPast(String member_id) throws Exception {
-		List<BookingVO> listBooking=guestDAO.selectListBookingPast(member_id);
-		return listBooking;
-	}
-	
-	//후기 리스트
-	@Override
-	public List listReview(String member_id) throws Exception {
+	public Map listGuest(String member_id) throws Exception {
+		Map listGuest=new HashMap();
+		List<BookingVO> listBookingFuture=guestDAO.selectListBookingFuture(member_id);
+		List<BookingVO> listBookingPast=guestDAO.selectListBookingPast(member_id);
 		List<ReviewVO> listReview=guestDAO.selectListReview(member_id);
-		return listReview;
-	}
-	
-	//숙소 평점
-	@Override
-	public double reviewAvg(int house_id) throws DataAccessException {
-		return guestDAO.selectReviewAvg(house_id);
-	}
-	
-	//숙소 후기갯수
-	@Override
-	public int reviewCount(int house_id) throws DataAccessException {
-		return guestDAO.selectReviewCount(house_id);
+		
+		List<ImageVO> listBookingFutureImg=new ArrayList();
+		List<ImageVO> listBookingPastImg=new ArrayList();
+		List<ImageVO> listReviewImg=new ArrayList();
+		//숙소 평점, 해당 후기 여부
+		for(BookingVO booking:listBookingPast) {
+			listBookingPastImg.add(commonService.selectHouseImageOne(booking.getHouse_id()));
+			for(ReviewVO review:listReview) {
+				listReviewImg.add(commonService.selectHouseImageOne(review.getHouse_id()));
+				if(booking.getBooking_id()==review.getBooking_id()) {
+					booking.setReviewCheck(1);
+				}
+			}
+		}
+		for(BookingVO booking:listBookingFuture) {
+			listBookingFutureImg.add(commonService.selectHouseImageOne(booking.getHouse_id()));
+		}
+		
+		int reviewCnt=reviewCnt(member_id);
+		listGuest.put("reviewCnt", reviewCnt);
+		listGuest.put("listBookingFuture", listBookingFuture);
+		listGuest.put("listBookingFutureImg", listBookingFutureImg);
+		listGuest.put("listBookingPast", listBookingPast);
+		listGuest.put("listBookingPastImg", listBookingPastImg);
+		listGuest.put("listReview", listReview);
+		listGuest.put("listReviewImg", listReviewImg);
+		return listGuest;
 	}
 	
 	//선택 예약
 	@Override
 	public BookingVO bookingInfo(int booking_id) throws Exception {
-		BookingVO bookingVO=guestDAO.selectBookingInfo(booking_id);
-		return bookingVO;
+		BookingVO bookingInfo=guestDAO.selectBookingInfo(booking_id);
+		return bookingInfo;
+	}
+	
+	@Override
+	public Map bookingReceipt(int booking_id) throws Exception {
+		Map listInfo=guestDAO.selectBookingReceipt(booking_id);
+		return listInfo;
 	}
 	
 	//예약 취소

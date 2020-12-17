@@ -30,13 +30,14 @@ public class MemberControllerImpl implements MemberController {
 	//회원가입, 로그인페이지
 	@RequestMapping(value = "/*Form.do", method = RequestMethod.GET)
 	public ModelAndView form(@RequestParam(value = "result", required = false) String result,
-							 @RequestParam(value = "action", required = false) String action,
 							 HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName=(String)request.getAttribute("viewName");
 		HttpSession session=request.getSession();
-		session.setAttribute("action", action);
 		ModelAndView mav=new ModelAndView(viewName);
 		mav.addObject("result", result);
+		
+		String referer=request.getHeader("Referer");
+		session.setAttribute("refUrl", referer.substring(21));
 		return mav;
 	}
 	
@@ -90,7 +91,18 @@ public class MemberControllerImpl implements MemberController {
 		session.removeAttribute("member");
 		session.removeAttribute("isLogOn");
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("redirect:/main.do");
+		
+		String referer=request.getHeader("Referer").substring(21);
+		if(referer.length()>16) {
+			if(referer.substring(8,14).equals("mypage")||referer.substring(14,21).equals("payment")) {
+				mav.setViewName("redirect:/main.do");
+			}else {
+				mav.setViewName("redirect:/"+referer.substring(8));
+			}
+		}else {
+			mav.setViewName("redirect:/"+referer.substring(8));
+			
+		}
 		return mav;
 	}
 }
