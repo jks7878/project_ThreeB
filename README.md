@@ -8,7 +8,7 @@
 >## /common
 >프로젝트 내에서 공통 적으로 사용되는 기능들(이미지 파일과 관련 기능과 ViewNameInterceptor)을 제어 
 >## /house
->숙소와 관련된 전반적인 기능들을 제어
+>숙소와 관련된 전반적인 기능 제어
 >> info 
 >* /info.do
 >> payment
@@ -17,10 +17,12 @@
 >> search
 >* /search.do
 >## /member
+> 회원가입과 로그인의 관련된 기능 제어
 >* /addMember.do
 >* /login.do
 >* /logout.do
 >## /mypage
+> 사용자의 예약과 리뷰, 숙소를 등록한 경우 등록한 숙소의 전반적인 관리 기능 제어
 >> guest
 >* /viewBooking.do
 >* /cancelBooking.do
